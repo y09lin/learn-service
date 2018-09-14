@@ -5,15 +5,14 @@ import com.hui.day.learn.controller.params.GetArticleParams;
 import com.hui.day.learn.controller.params.ParagraphParams;
 import com.hui.day.learn.response.RestResponse;
 import com.hui.day.learn.response.codes.Rest2Code;
+import com.hui.day.learn.response.dto.ArticleDetailVO;
 import com.hui.day.learn.response.dto.ArticleVO;
 import com.hui.day.learn.response.dto.PageDto;
 import com.hui.day.learn.service.ArticleService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -56,5 +55,12 @@ public class ArticleController extends BaseController{
             params.setPageSize(20);
         }
         return RestResponse.ok(articleService.getArticlePage(params));
+    }
+
+    @ApiModelProperty("获取文章详情")
+    @GetMapping("/getArticle/{articleId}")
+    public RestResponse<ArticleDetailVO> getArticleDetail(
+            @PathVariable("articleId") Long articleId){
+        return RestResponse.ok(articleService.getArticleDetail(articleId));
     }
 }

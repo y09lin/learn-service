@@ -4,6 +4,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * @author huim_lin
+ * */
+
 @AllArgsConstructor
 @Data
 public class ArticleVO {

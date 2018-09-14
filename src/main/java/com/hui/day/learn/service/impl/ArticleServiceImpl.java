@@ -11,6 +11,7 @@ import com.hui.day.learn.repository.ArticleRepository;
 import com.hui.day.learn.repository.ParagraphRepository;
 import com.hui.day.learn.repository.SentenceRepository;
 import com.hui.day.learn.repository.VoaRepository;
+import com.hui.day.learn.response.dto.ArticleDetailVO;
 import com.hui.day.learn.response.dto.ArticleVO;
 import com.hui.day.learn.response.dto.PageDto;
 import com.hui.day.learn.service.ArticleService;
@@ -113,5 +114,14 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public PageDto<ArticleVO> getArticlePage(GetArticleParams params) {
         return articleDao.getArticlePage(params);
+    }
+
+    @Override
+    public ArticleDetailVO getArticleDetail(Long articleId) {
+        ArticleDetailVO vo = articleDao.getArticle(articleId);
+        if (vo!=null){
+            vo.setParagraphList(articleDao.getParagraphList(articleId));
+        }
+        return vo;
     }
 }
