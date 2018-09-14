@@ -17,7 +17,7 @@ public interface ArticleService {
      * 添加文章
      * @param params 参数
      * @return true-添加成功
-     * @throws Exception
+     * @throws Exception 添加异常
      */
     boolean addArticle(ArticleParams params) throws Exception;
 
