@@ -1,9 +1,6 @@
 package com.hui.day.learn.service.impl;
 
-import com.hui.day.learn.controller.params.ArticleParams;
-import com.hui.day.learn.controller.params.GetArticleParams;
-import com.hui.day.learn.controller.params.ParagraphParams;
-import com.hui.day.learn.controller.params.SentencePointParams;
+import com.hui.day.learn.controller.params.*;
 import com.hui.day.learn.dao.ArticleDao;
 import com.hui.day.learn.domain.TbArticle;
 import com.hui.day.learn.domain.TbParagraph;
@@ -21,9 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author wahaha
@@ -126,8 +121,29 @@ public class ArticleServiceImpl implements ArticleService {
         return vo;
     }
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean setSentencePoint(SentencePointParams params) {
-        return false;
+        List<PointParams> pointList = params.getPointList();
+        if (pointList == null || pointList.isEmpty()){
+            return true;
+        }
+        List<Long> idList = new ArrayList<>();
+        Map<Long,PointParams> map = new HashMap<>(pointList.size());
+        for (PointParams p:pointList){
+            idList.add(p.getSentenceId());
+            map.put(p.getSentenceId(),p);
+        }
+        List<TbSentence> slist = articleDao.getSentences(idList);
+        if (slist == null || slist.isEmpty()){
+            return false;
+        }
+        for (TbSentence s:slist){
+            PointParams p = map.get(s.getSentenceId());
+            s.setBeginPoint(p.getBeginPoint());
+            s.setEndPoint(p.getEndPoint());
+        }
+        sentenceRepository.saveAll(slist);
+        return true;
     }
 }

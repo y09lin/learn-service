@@ -2,6 +2,7 @@ package com.hui.day.learn.dao.impl;
 
 import com.hui.day.learn.controller.params.GetArticleParams;
 import com.hui.day.learn.dao.ArticleDao;
+import com.hui.day.learn.domain.TbSentence;
 import com.hui.day.learn.response.dto.*;
 import com.hui.day.learn.utils.StringHelper;
 import lombok.extern.slf4j.Slf4j;
@@ -97,6 +98,14 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao {
         List<SentenceVO> sentenceList = getSentence(articleId);
         setSentences(paragraphList,sentenceList);
         return paragraphList;
+    }
+
+    @Override
+    public List<TbSentence> getSentences(List<Long> idList) {
+        StringBuilder sb = new StringBuilder("SELECT * FROM tb_sentence WHERE sentence_id IN (:idList)");
+        Query query = entityManager.createNativeQuery(sb.toString(),TbSentence.class);
+        query.setParameter("idList",idList);
+        return query.getResultList();
     }
 
     private List<ParagraphVO> getParagraphFromDB(List<Object[]> list){

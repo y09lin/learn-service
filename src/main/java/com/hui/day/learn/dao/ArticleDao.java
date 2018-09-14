@@ -1,6 +1,7 @@
 package com.hui.day.learn.dao;
 
 import com.hui.day.learn.controller.params.GetArticleParams;
+import com.hui.day.learn.domain.TbSentence;
 import com.hui.day.learn.response.dto.ArticleDetailVO;
 import com.hui.day.learn.response.dto.ArticleVO;
 import com.hui.day.learn.response.dto.PageDto;
@@ -33,4 +34,11 @@ public interface ArticleDao {
      * @return ParagraphVO列表
      */
     List<ParagraphVO> getParagraphList(Long articleId);
+
+    /**
+     * 根据句子id，获取句子
+     * @param idList id列表
+     * @return TbSentence列表
+     */
+    List<TbSentence> getSentences(List<Long> idList);
 }
