@@ -3,15 +3,17 @@ package com.hui.day.learn.controller;
 import com.hui.day.learn.controller.params.ArticleParams;
 import com.hui.day.learn.controller.params.GetArticleParams;
 import com.hui.day.learn.controller.params.ParagraphParams;
+import com.hui.day.learn.controller.params.SentencePointParams;
 import com.hui.day.learn.response.RestResponse;
-import com.hui.day.learn.response.codes.Rest2Code;
+import com.hui.day.learn.response.codes.Default0Code;
 import com.hui.day.learn.response.dto.ArticleDetailVO;
 import com.hui.day.learn.response.dto.ArticleVO;
 import com.hui.day.learn.response.dto.PageDto;
 import com.hui.day.learn.service.ArticleService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -33,7 +35,7 @@ public class ArticleController extends BaseController{
         try {
             return RestResponse.ok(articleService.addArticle(params));
         } catch (Exception e) {
-            return RestResponse.exception(Rest2Code.REST_ILLEGAL_PARAMS);
+            return RestResponse.exception(Default0Code.ILLEGAL_PARAMS);
         }
     }
 
@@ -57,10 +59,21 @@ public class ArticleController extends BaseController{
         return RestResponse.ok(articleService.getArticlePage(params));
     }
 
-    @ApiModelProperty("获取文章详情")
+    @ApiOperation("获取文章详情")
     @GetMapping("/getArticle/{articleId}")
     public RestResponse<ArticleDetailVO> getArticleDetail(
             @PathVariable("articleId") Long articleId){
         return RestResponse.ok(articleService.getArticleDetail(articleId));
+    }
+
+    @ApiOperation("设置句子音视频时间节点")
+    @PostMapping("/setSentencePoint")
+    public RestResponse<Boolean> setSentencePoint(
+            @Validated @RequestBody SentencePointParams params,
+            BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return RestResponse.exception(Default0Code.ILLEGAL_PARAMS);
+        }
+        return RestResponse.ok(articleService.setSentencePoint(params));
     }
 }

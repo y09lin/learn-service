@@ -5,7 +5,6 @@ package com.hui.day.learn.response.exception;
 
 import com.hui.day.learn.response.RestResponse;
 import com.hui.day.learn.response.codes.Default0Code;
-import com.hui.day.learn.response.codes.Rest2Code;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;

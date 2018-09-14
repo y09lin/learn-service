@@ -3,6 +3,7 @@ package com.hui.day.learn.service.impl;
 import com.hui.day.learn.controller.params.ArticleParams;
 import com.hui.day.learn.controller.params.GetArticleParams;
 import com.hui.day.learn.controller.params.ParagraphParams;
+import com.hui.day.learn.controller.params.SentencePointParams;
 import com.hui.day.learn.dao.ArticleDao;
 import com.hui.day.learn.domain.TbArticle;
 import com.hui.day.learn.domain.TbParagraph;
@@ -123,5 +124,10 @@ public class ArticleServiceImpl implements ArticleService {
             vo.setParagraphList(articleDao.getParagraphList(articleId));
         }
         return vo;
+    }
+
+    @Override
+    public boolean setSentencePoint(SentencePointParams params) {
+        return false;
     }
 }
