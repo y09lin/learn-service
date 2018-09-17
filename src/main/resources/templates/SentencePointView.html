@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SentencePoint</title>
+</head>
+<body>
+<div th:object="${articleDetail}">
+    <!-- article -->
+    <div th:text="${articleDetail.title}"></div>
+    <div>
+        <!-- mp3 -->
+        <!--<audio controls="controls" th:src="${articleDetail.mp3}"></audio>-->
+    </div>
+
+    <table border="1" cellpadding="2">
+        <thead>
+        <tr>
+            <th>Content</th>
+            <th>beginPoint</th>
+            <th>endPoint</th>
+        </tr>
+        </thead>
+        <tbody th:each="paragraph : ${articleDetail.paragraphList}">
+        <tr th:each="sentence : ${paragraph.sentenceList}">
+            <td th:text="${sentence.content}"></td>
+            <td><button th:text="${sentence.beginPoint}"></button></td>
+            <td><button th:text="${sentence.endPoint}"></button></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<button>
+    submit
+</button>
+</body>
+</html>

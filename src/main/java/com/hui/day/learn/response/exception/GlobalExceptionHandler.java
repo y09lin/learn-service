@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public RestResponse exception(HttpServletRequest request, Exception e) {
-        RestResponse exception = RestResponse.exception(Rest2Code.REST_ILLEGAL_PARAMS,null);
+        RestResponse exception = RestResponse.exception(Default0Code.ILLEGAL_PARAMS,null);
         log.error("GlobalException: {}", e);
         return exception;
     }
@@ -55,7 +55,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     @ResponseBody
     public RestResponse exception(HttpServletRequest req, HttpMessageNotReadableException e) {
-        RestResponse exception = RestResponse.exception(Rest2Code.REST_ILLEGAL_PARAMS,null);
+        RestResponse exception = RestResponse.exception(Default0Code.ILLEGAL_PARAMS,null);
         log.error("HttpMessageNotReadableException: {}", exception, e);
         return exception;
     }
