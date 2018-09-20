@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 /**
  * @author huim_lin
  * */
-@Api("添加文章接口")
+@Api(description = "文章相关接口")
 @RestController
 @RequestMapping(path = "/article",headers = BaseController.TOKEN)
 public class ArticleController extends BaseController{

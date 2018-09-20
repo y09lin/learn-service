@@ -10,7 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api("调戏接口")
+/**
+ * @author huim_lin
+ * */
+
+@Api(description = "调戏接口")
 @RestController
 @RequestMapping(path = "/test")
 public class TestController {

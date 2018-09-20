@@ -4,13 +4,16 @@ import com.google.common.base.MoreObjects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * @author huim_lin
+ * */
 @AllArgsConstructor
 @Getter
-public enum User1Code implements CodeEnum {
+public enum English2Code implements CodeEnum {
     /**
      *
      * */
-    USER_EXIST(100010001, "用户已经存在");
+    TRANSLATE_ERROR(100020001, "翻译失败");
 
     private final int code;
     private final String defaultMessage;
