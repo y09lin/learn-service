@@ -75,7 +75,8 @@ public class WordDaoImpl extends BaseDao implements WordDao {
         if (pageIndex * pageSize + pageSize > count){
             return new PageImpl<>(new ArrayList<>(), pageable, count);
         }
-        sb.append(wordOrder(orderList, sortList));
+        sb.append(wordOrder(orderList, sortList))
+                .append("LIMIT ").append(pageIndex).append(",").append(pageSize);
         Query query = em.createNativeQuery(sb.toString(), TbWord.class);
         setQueryParams(query, map);
         return new PageImpl<>(query.getResultList(), pageable, count);
