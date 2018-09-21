@@ -2,8 +2,12 @@ package com.hui.day.learn.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.hui.day.learn.dao.WordDao;
 import com.hui.day.learn.domain.TbWord;
+import com.hui.day.learn.domain.TbWordBook;
+import com.hui.day.learn.repository.WordBookRepository;
 import com.hui.day.learn.repository.WordRepository;
+import com.hui.day.learn.response.dto.WordBookVO;
 import com.hui.day.learn.response.dto.WordVO;
 import com.hui.day.learn.service.WordService;
 import com.hui.day.learn.utils.Constans;
@@ -14,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 /**
  * description ：
@@ -26,6 +32,12 @@ import java.io.IOException;
 public class WordServiceImpl implements WordService {
     @Autowired
     private WordRepository wordRepository;
+
+    @Autowired
+    private WordBookRepository bookRepository;
+
+    @Autowired
+    private WordDao wordDao;
 
     @Override
     public WordVO translate(String word) {
@@ -54,6 +66,25 @@ public class WordServiceImpl implements WordService {
             vo = WordVO.getFromTb(tb);
         }
         return vo;
+    }
+
+    @Override
+    public WordBookVO createBook(long userId, String bookName) {
+        TbWordBook book = new TbWordBook();
+        book.setUserId(userId);
+        book.setBookName(bookName);
+        book.setCreateTime(new Date());
+        return WordBookVO.getFromTb(bookRepository.save(book));
+    }
+
+    @Override
+    public WordBookVO getWordBook(long userId, long bookId) {
+        return WordBookVO.getFromTb(wordDao.getWordBook(userId, bookId));
+    }
+
+    @Override
+    public List<WordBookVO> getWordBook(long userId) {
+        return WordBookVO.getFromTb(wordDao.getWordBook(userId));
     }
 
     private TbWord getFromNetwork(String word,String translation){

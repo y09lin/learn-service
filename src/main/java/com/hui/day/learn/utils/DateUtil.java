@@ -16,7 +16,8 @@ import java.util.Date;
 public class DateUtil {
 
 	public final static String FORMAT_DATE_TIME_YMDHMS = "yyyy-MM-dd HH:mm:ss";
-	
+	public final static String FORMAT_DATE_TIME_YMDHM = "yyyy-MM-dd HH:mm";
+
 	public final static String FORMAT_DATE_TIME_YMDHMS_ZN = "yyyy年MM月dd日 HH:mm:ss";
 	
 	public final static String FORMAT_DATE_YMD = "yyyy-MM-dd";
@@ -31,6 +32,11 @@ public class DateUtil {
         SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_DATE_YMD);
         return sdf.format(date);
     }
+
+    public static String toString(Date date, String format){
+    	SimpleDateFormat sdf = new SimpleDateFormat(format);
+    	return sdf.format(date);
+	}
 
     /**
      * date 转化成 String(yyyy-MM-dd HH:mm:ss)
