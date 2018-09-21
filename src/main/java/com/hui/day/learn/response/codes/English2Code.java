@@ -13,7 +13,8 @@ public enum English2Code implements CodeEnum {
     /**
      *
      * */
-    TRANSLATE_ERROR(100020001, "翻译失败");
+    TRANSLATE_ERROR(100020001, "翻译失败"),
+    WORD_BOOK_NOT_EXIST(100020002, "单词本不存在");
 
     private final int code;
     private final String defaultMessage;

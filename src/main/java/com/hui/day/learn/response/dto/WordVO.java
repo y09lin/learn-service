@@ -56,4 +56,14 @@ public class WordVO {
         vo.setWeb(JSON.parseArray(word.getWeb(),WordWebVO.class));
         return vo;
     }
+
+    public static List<WordVO> getFromTb(List<TbWord> words){
+        List<WordVO> voList = new ArrayList<>();
+        if (words!=null && words.size()>0){
+            for (TbWord w:words){
+                voList.add(getFromTb(w));
+            }
+        }
+        return voList;
+    }
 }
